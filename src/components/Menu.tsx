@@ -15,13 +15,13 @@ export default function Menu() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
           {PRODUCTS.map((item) => (
             <div key={item.id} className="group bg-white rounded-3xl overflow-hidden shadow-lg border border-gray-100 hover:shadow-2xl transition-all">
-              <div className="h-64 overflow-hidden">
-                <img 
-                  src={item.image} 
-                  alt={item.name} 
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-              </div>
+              <div className="h-48 w-full overflow-hidden"> {/* Isso limita a altura da imagem */}
+  <img 
+    src={item.image} 
+    alt={item.name} 
+    className="w-full h-full object-cover" 
+  />
+</div>
               <div className="p-8">
                 <h3 className="text-xl font-bold text-brand-dark mb-2">{item.name}</h3>
                 <p className="text-gray-500 text-sm mb-6 leading-relaxed">
