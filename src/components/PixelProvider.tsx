@@ -8,30 +8,35 @@ export default function PixelProvider() {
   const searchParams = useSearchParams();
 
   useEffect(() => {
-    // 1. Pega o ID (Prioridade: LocalStorage > ENV)
+    // 1. Definição do ID
     const savedId = localStorage.getItem("custom_pixel_id");
     const pixelId = savedId || process.env.NEXT_PUBLIC_META_PIXEL_ID;
 
-    if (!pixelId || pixelId === "undefined") return;
+    if (!pixelId || pixelId === "undefined" || pixelId === "null") return;
 
-    // 2. Inicializa o Facebook Pixel se ainda não existir
-    if (!(window as any).fbq) {
-      (function(f,b,e,v,n,t,s)
-      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-      n.queue=[];t=b.createElement(e);t.async=!0;
-      t.src=v;s=b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t,s)}(window, document,'script',
-      'https://connect.facebook.net/en_US/fbevents.js'));
+    // 2. Inicialização segura do Pixel
+    const fb = (window as any);
+    if (!fb.fbq) {
+      fb.fbq = function() {
+        fb.fbq.callMethod ? fb.fbq.callMethod.apply(fb.fbq, arguments) : fb.fbq.queue.push(arguments);
+      };
+      if (!fb._fbq) fb._fbq = fb.fbq;
+      fb.fbq.push = fb.fbq;
+      fb.fbq.loaded = !0;
+      fb.fbq.version = '2.0';
+      fb.fbq.queue = [];
+      const t = document.createElement('script');
+      t.async = !0;
+      t.src = 'https://connect.facebook.net/en_US/fbevents.js';
+      const s = document.getElementsByTagName('script')[0];
+      s.parentNode?.insertBefore(t, s);
 
-      (window as any).fbq('init', pixelId);
+      fb.fbq('init', pixelId);
     }
 
-    // 3. Rastreia PageView toda vez que a rota mudar
-    (window as any).fbq('track', 'PageView');
-
+    // 3. Track PageView
+    fb.fbq('track', 'PageView');
   }, [pathname, searchParams]);
 
-  return null; // Este componente não renderiza nada visualmente
+  return null;
 }
