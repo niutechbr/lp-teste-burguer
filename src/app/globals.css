@@ -1,18 +1,14 @@
 @import "tailwindcss";
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-/* Se o @import "tailwindcss" der erro, mantenha apenas os 3 @tailwind abaixo */
-
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 255, 255, 255;
-  --background-end-rgb: 255, 255, 255;
+@theme {
+  --color-brand-orange: #F59E0B;
+  --color-brand-yellow: #FBBF24;
+  --color-brand-dark: #121212;
+  --color-brand-white: #FDFDFD;
 }
 
+/* Forçamos o fundo a ser sempre claro e o texto escuro por padrão */
 body {
-  color: rgb(var(--foreground-rgb));
-  background: white;
+  background-color: white;
+  color: #121212;
 }

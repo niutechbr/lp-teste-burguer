@@ -1,19 +1,16 @@
-import "./globals.css"; // ESTA LINHA É OBRIGATÓRIA
-import type { Metadata } from "next";
+import "./globals.css";
+import { Suspense } from "react";
+import PixelProvider from "@/components/PixelProvider";
 
-export const metadata: Metadata = {
-  title: "Burger Artesanal",
-  description: "O melhor hambúrguer da região",
-};
-
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="pt-br">
-      <body>{children}</body>
+      <body>
+        <Suspense fallback={null}>
+          <PixelProvider />
+        </Suspense>
+        {children}
+      </body>
     </html>
   );
 }

@@ -1,24 +1,26 @@
+import Link from "next/link";
+import { Settings } from "lucide-react";
+
 export default function Footer() {
   return (
-    <footer className="bg-brand-dark text-white py-12 px-6">
-      <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+    <footer className="bg-brand-dark border-t border-gray-800 py-10 px-6 mt-10">
+      <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
         <div className="text-center md:text-left">
-          <h3 className="text-3xl font-black text-brand-orange italic">BURGER<span className="text-brand-yellow">APP</span></h3>
-          <p className="text-gray-400 mt-2">Qualidade artesanal na sua mesa.</p>
+          <h3 className="text-brand-yellow font-black text-xl uppercase italic">
+            Burger <span className="text-brand-orange">Fire</span>
+          </h3>
+          <p className="text-gray-600 text-xs mt-1 italic">
+            Plataforma de Vendas Automática
+          </p>
         </div>
 
-        <div className="flex flex-col gap-3 text-center md:text-right">
-          <p className="text-brand-yellow font-semibold uppercase tracking-wider text-sm text-center">Fale Conosco</p>
-          <a href="tel:34999999999" className="text-xl font-bold hover:text-brand-orange transition">
-            34 99999-9999
-          </a>
-          <a href="mailto:teste@gmail.com" className="text-gray-400 hover:text-brand-yellow transition">
-            teste@gmail.com
-          </a>
-        </div>
-      </div>
-      <div className="border-t border-gray-800 mt-10 pt-6 text-center text-xs text-gray-500 uppercase tracking-widest">
-        © 2026 Burger Artesanal - Feito com LPs
+        <Link 
+          href="/debug" 
+          className="flex items-center gap-2 text-gray-700 hover:text-brand-orange transition-all text-[8px] font-mono uppercase tracking-widest border border-gray-800 px-4 py-2 rounded-full"
+        >
+          <Settings size={14} />
+          Configurar Pixel
+        </Link>
       </div>
     </footer>
   );
